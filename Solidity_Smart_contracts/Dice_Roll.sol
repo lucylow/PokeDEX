@@ -3,7 +3,7 @@ pragma solidity 0.6.6;
 
 import "smartcontractkit/chainlink-brownie-contracts@1.0.2/contracts/src/v0.6/VRFConsumerBase.sol";
 
-contract dice_roll is VRFConsumerBase {
+contract FantasyCharacter is VRFConsumerBase {
     using SafeMathChainlink for uint256;
 
     uint256 private constant ROLL_IN_PROGRESS = 42;
@@ -41,15 +41,15 @@ contract dice_roll is VRFConsumerBase {
         emit DiceLanded(requestId, d10Value);
     }
     //  fighting
-    function PokemonRace() public view returns (string memory) {
+    function mithicRace() public view returns (string memory) {
         address player = msg.sender;
         require(s_results[player] != 0, "Pokemon battle not in progress");
         require(s_results[player] != ROLL_IN_PROGRESS, "Pokemon battle in progress");
-        return getPokemonRace(s_results[player]);
+        return getMithicRace(s_results[player]);
     }
 
-    function getPokemonRace(uint256 id) private pure returns (string memory) {
-        string[10] memory PokemonRaces = [
+    function getMithicRace(uint256 id) private pure returns (string memory) {
+        string[10] memory mithicRaces = [
             "Fight",	
             "Bag",
             "Run",	
@@ -57,10 +57,10 @@ contract dice_roll is VRFConsumerBase {
             "Use Item",	
             "Switch Pokemon",	
             "Restore HP",	
-            "Withdrawl",	
+            "Paralysis",	
             "Sleep", 	
             "Z-Move"
         ];
-        return PokemonRaces[id.sub(1)];
+        return mithicRaces[id.sub(1)];
     }
 }
